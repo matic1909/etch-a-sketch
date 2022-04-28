@@ -40,6 +40,10 @@ h1 {
   width: 600px;
 }
 
+#title {
+  margin-bottom: 0;
+}
+
 #instruction {
   margin-bottom: 32px;
 }
