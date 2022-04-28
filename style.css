@@ -40,6 +40,10 @@ h1 {
   width: 600px;
 }
 
+#instruction {
+  margin-bottom: 32px;
+}
+
 .controls {
   padding-top: 15px;
   position: relative;
