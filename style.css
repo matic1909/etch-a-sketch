@@ -1,34 +1,57 @@
 body {
+  font-family: 'Mali', cursive;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(255, 227, 227);
 }
 
-.container {
-  margin-top: 64px;
-  border: 60px solid red;
+input[type='color'] {
+  -webkit-appearance: none;
+  border: none;
+}
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type='color']::-webkit-color-swatch {
+  border: none;
+}
+
+h1 {
+  font-size: 64px;
+}
+
+.etch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 48px;
+  background-color: rgb(200, 0, 0);
+  border: 80px solid rgb(200, 0, 0);
+  border-top: 1px solid rgb(200, 0, 0);
+  border-bottom: 15px solid rgb(200, 0, 0);
   border-radius: 15px;
+  box-shadow: 10px 10px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.container {
   display: grid;
   height: 600px;
   width: 600px;
 }
 
 .controls {
+  padding-top: 15px;
   position: relative;
   width: 600px;
   height: 150px;
-  border: 60px solid red;
-  border-bottom: none;
-  transform: translateY(-50px);
-  border-radius: 15px;
-  background-color: red;
+  background-color: rgb(200, 0, 0);
 }
 
 .control-knobs {
   position: absolute;
   width: 600px;
-  height: 120px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +61,8 @@ body {
   height: 140px;
   width: 140px;
   border-radius: 100px;
-  background-color: rgb(251, 255, 230);
+  background-color: rgb(253, 255, 244);
+  box-shadow: 5px 5px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .knob-right {
@@ -50,21 +74,32 @@ body {
 }
 
 .cell {
-  background-color: lightgray;
+  background-color: rgb(207, 211, 223);
   border: 1px solid black;
 }
 
 button {
   min-width: 100px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding: 10px 20px;
   border: 3px solid black;
   border-radius: 5px;
   background-color: lightgrey;
 }
 
-.button-group {
-  margin-top: 64px;
+.menu-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.option-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .mode-button {
@@ -77,6 +112,20 @@ button {
 }
 
 #branding {
-  font-size: 48px;
+  text-align: center;
+  align-self: center;
+  font-size: 52px;
   color: rgb(255, 242, 123);
+}
+
+#branding > p {
+  margin: 16px;
+}
+
+#colorpicker {
+  border: 3px solid black;
+  border-radius: 5px;
+  height: 50px;
+  width: 50px;
+  transform: translateY(-8px);
 }

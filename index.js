@@ -3,35 +3,52 @@ const gridButton = document.querySelector('#generate-grid-button');
 const toggleColorButton = document.querySelector('#color');
 const clearButton = document.querySelector('#clear-button');
 const modeButtons = document.querySelectorAll('.mode-button');
+const colorPicker = document.querySelector('#colorpicker');
 
 const rainbowColors = [
-  [255, 0, 0],
-  [255, 64, 0],
-  [255, 127, 0],
-  [255, 192, 0],
-  [255, 255, 0],
-  [192, 255, 0],
-  [127, 255, 0],
-  [64, 255, 0],
-  [0, 255, 0],
-  [0, 255, 64],
-  [0, 255, 127],
-  [0, 255, 192],
-  [0, 255, 255],
-  [0, 192, 255],
-  [0, 127, 255],
-  [0, 64, 255],
-  [0, 0, 255],
-  [64, 0, 255],
-  [127, 0, 255],
-  [192, 0, 255],
-  [255, 0, 255],
-  [255, 0, 192],
-  [255, 0, 127],
-  [255, 0, 64],
+  '#ff0000',
+  '#ff1f00',
+  '#ff3f00',
+  '#ff7f00',
+  '#ff9f00',
+  '#ffbf00',
+  '#ffdf00',
+  '#dfff00',
+  '#bfff00',
+  '#9fff00',
+  '#5fff00',
+  '#3fff00',
+  '#1fff00',
+  '#00ff1f',
+  '#00ff3f',
+  '#00ff5f',
+  '#00ff7f',
+  '#00ff9f',
+  '#00ffbf',
+  '#00ffdf',
+  '#00feff',
+  '#00dfff',
+  '#009fff',
+  '#007fff',
+  '#005fff',
+  '#003fff',
+  '#001fff',
+  '#0000ff',
+  '#3f00ff',
+  '#5f00ff',
+  '#7f00ff',
+  '#bf00ff',
+  '#df00ff',
+  '#ff00fe',
+  '#ff00bf',
+  '#ff009f',
+  '#ff007f',
+  '#ff005f',
+  '#ff003f',
+  '#ff001f',
 ];
 let currentMode = 'color';
-let colorValues = [0, 0, 0];
+let currentColor = '#000000';
 let rainbow = false;
 let rainbowIndex = 0;
 let randomColor = false;
@@ -104,13 +121,13 @@ const handleMouseEnter = (e) => {
     e.target.style.backgroundColor = '';
   } else if (drawing) {
     setColor();
-    e.target.style.backgroundColor = getColorString(colorValues);
+    e.target.style.backgroundColor = currentColor;
   }
 };
 
 const handleClick = (e) => {
   setColor();
-  e.target.style.backgroundColor = getColorString(colorValues);
+  e.target.style.backgroundColor = currentColor;
 };
 
 const handleRightClick = (e) => {
@@ -133,13 +150,13 @@ const generateGrid = (size) => {
 
 const setColor = () => {
   if (currentMode === 'color') {
-    colorValues = [0, 0, 0];
+    currentColor = colorPicker.value;
     return;
   }
   if (currentMode === 'random') {
-    getRandomRGB();
+    currentColor = getRandomColor();
   }
-  if (currentMode === 'rainbow' || currentMode === 'rainbow-fine') {
+  if (currentMode === 'rainbow') {
     getNextColorInRainbow();
   }
 };
@@ -148,18 +165,14 @@ const getColorString = (color) => {
   return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
 };
 
-const getRandomRGB = () => {
-  const r = Math.floor(Math.random() * 255);
-  const g = Math.floor(Math.random() * 255);
-  const b = Math.floor(Math.random() * 255);
-
-  colorValues = [r, g, b];
+const getRandomColor = () => {
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  return '#' + randomColor;
 };
 
 const getNextColorInRainbow = () => {
   let step = 1;
-  if (currentMode === 'rainbow') step = 2;
-  colorValues = rainbowColors[rainbowIndex];
+  currentColor = rainbowColors[rainbowIndex];
   rainbowIndex = (rainbowIndex + step) % rainbowColors.length;
 };
 
