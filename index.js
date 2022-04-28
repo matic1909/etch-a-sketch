@@ -1,8 +1,8 @@
 const container = document.querySelector('.container');
-const gridButton = document.querySelector('.generate-grid-button');
-const toggleColorButton = document.querySelector('.toggle-color');
-const clearButton = document.querySelector('.clear');
-const colorDisplay = document.querySelector('.color');
+const gridButton = document.querySelector('#generate-grid-button');
+const toggleColorButton = document.querySelector('#color');
+const clearButton = document.querySelector('#clear-button');
+const modeButtons = document.querySelectorAll('.mode-button');
 
 const rainbowColors = [
   [255, 0, 0],
@@ -30,28 +30,49 @@ const rainbowColors = [
   [255, 0, 127],
   [255, 0, 64],
 ];
-const modes = ['black', 'random', 'rainbow', 'rainbow-fine'];
-let currentMode = 0;
+let currentMode = 'color';
 let colorValues = [0, 0, 0];
 let rainbow = false;
 let rainbowIndex = 0;
 let randomColor = false;
 let drawing = false;
+let erasing = false;
 
 window.addEventListener('mousedown', (e) => {
   e.preventDefault();
-  drawing = true;
+  if (e.button === 0) drawing = true;
+  if (e.button === 2) erasing = true;
 });
 
 window.addEventListener('mouseup', (e) => {
   e.preventDefault();
   drawing = false;
+  erasing = false;
+});
+
+modeButtons.forEach((modeButton) => {
+  modeButton.addEventListener('click', (e) => {
+    currentMode = e.target.id;
+    modeButton.classList.add('active');
+    modeButtons.forEach((button) => {
+      if (button.id !== e.target.id) button.classList.remove('active');
+    });
+  });
 });
 
 gridButton.addEventListener('click', (e) => {
   gridSize = getGridSize();
-  generateGrid(gridSize);
-  currentMode = 0;
+  if (gridSize) {
+    generateGrid(gridSize);
+    currentMode = 'color';
+    modeButtons.forEach((button) => {
+      if (button.id !== color) {
+        button.classList.remove('active');
+      } else {
+        button.classList.add('active');
+      }
+    });
+  }
 });
 
 const getGridSize = () => {
@@ -59,7 +80,7 @@ const getGridSize = () => {
     let input = prompt('How many squares?');
     if (input === null) {
       alert("I'm out of here");
-      return true;
+      return false;
     } else {
       if (isNaN(input)) {
         alert('Invalid input, please enter a number');
@@ -72,11 +93,6 @@ const getGridSize = () => {
   }
 };
 
-toggleColorButton.addEventListener('click', (e) => {
-  currentMode = (currentMode + 1) % modes.length;
-  colorDisplay.textContent = `${modes[currentMode].toUpperCase()}`;
-});
-
 clearButton.addEventListener('click', (e) => {
   container.childNodes.forEach((div) => {
     div.style.backgroundColor = '';
@@ -84,8 +100,10 @@ clearButton.addEventListener('click', (e) => {
 });
 
 const handleMouseEnter = (e) => {
-  setColor();
-  if (drawing) {
+  if (erasing) {
+    e.target.style.backgroundColor = '';
+  } else if (drawing) {
+    setColor();
     e.target.style.backgroundColor = getColorString(colorValues);
   }
 };
@@ -114,15 +132,14 @@ const generateGrid = (size) => {
 };
 
 const setColor = () => {
-  const mode = modes[currentMode];
-  if (mode === 'black') {
+  if (currentMode === 'color') {
     colorValues = [0, 0, 0];
     return;
   }
-  if (mode === 'random') {
+  if (currentMode === 'random') {
     getRandomRGB();
   }
-  if (mode === 'rainbow' || mode === 'rainbow-fine') {
+  if (currentMode === 'rainbow' || currentMode === 'rainbow-fine') {
     getNextColorInRainbow();
   }
 };
@@ -141,7 +158,7 @@ const getRandomRGB = () => {
 
 const getNextColorInRainbow = () => {
   let step = 1;
-  if (modes[currentMode] === 'rainbow') step = 2;
+  if (currentMode === 'rainbow') step = 2;
   colorValues = rainbowColors[rainbowIndex];
   rainbowIndex = (rainbowIndex + step) % rainbowColors.length;
 };
