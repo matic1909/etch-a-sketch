@@ -103,6 +103,8 @@ const getGridSize = () => {
         alert('Invalid input, please enter a number');
       } else if (input.length <= 0) {
         return 16;
+      } else if (parseInt(input) > 100) {
+        alert('Maximum is 100, sorry :(');
       } else {
         return parseInt(input);
       }
