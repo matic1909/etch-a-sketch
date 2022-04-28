@@ -1,7 +1,138 @@
+/* Begin Reset */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* End of Reset */
+
 body {
   font-family: 'Mali', cursive;
+  text-align: center;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   background-color: rgb(255, 227, 227);
 }
@@ -25,34 +156,36 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 48px;
   background-color: rgb(200, 0, 0);
-  border: 80px solid rgb(200, 0, 0);
+  border: 2.5vw solid rgb(200, 0, 0);
+  border-bottom: 10px solid rgb(200, 0, 0);
   border-top: 1px solid rgb(200, 0, 0);
-  border-bottom: 15px solid rgb(200, 0, 0);
   border-radius: 15px;
   box-shadow: 10px 10px 2px 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 64px;
 }
 
 .container {
   display: grid;
-  height: 600px;
-  width: 600px;
+  height: 70vw;
+  max-height: 600px;
+  width: 70vw;
+  max-width: 600px;
 }
 
 #title {
-  margin-bottom: 0;
-}
-
-#instruction {
-  margin-bottom: 32px;
+  margin-top: 32px;
 }
 
 .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   padding-top: 15px;
-  position: relative;
-  width: 600px;
-  height: 150px;
+  width: 70vw;
+  max-width: 600px;
+  height: 25vw;
+  max-height: 150px;
   background-color: rgb(200, 0, 0);
 }
 
@@ -62,23 +195,17 @@ h1 {
   height: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .knob {
-  height: 140px;
-  width: 140px;
+  height: 20vw;
+  max-height: 140px;
+  width: 20vw;
+  max-width: 140px;
   border-radius: 100px;
   background-color: rgb(253, 255, 244);
   box-shadow: 5px 5px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-.knob-right {
-  transform: translateX(50px);
-}
-
-.knob-left {
-  transform: translateX(-50px);
 }
 
 .cell {
@@ -88,11 +215,18 @@ h1 {
 
 button {
   min-width: 100px;
-  margin-bottom: 8px;
   padding: 10px 20px;
   border: 3px solid black;
   border-radius: 5px;
   background-color: lightgrey;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
 }
 
 .menu-buttons {
@@ -102,12 +236,11 @@ button {
   gap: 12px;
 }
 
-.option-group {
+.option-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-top: 24px;
 }
 
 .mode-button {
@@ -136,4 +269,14 @@ button {
   height: 50px;
   width: 50px;
   transform: translateY(-8px);
+}
+
+@media (max-width: 500px) {
+  .menu-buttons {
+    flex-direction: column;
+  }
+
+  .option-buttons {
+    flex-direction: column;
+  }
 }
