@@ -49,10 +49,28 @@ window.addEventListener('mouseup', (e) => {
 });
 
 gridButton.addEventListener('click', (e) => {
-  const gridSize = parseInt(prompt('How many squares?'));
+  gridSize = getGridSize();
   generateGrid(gridSize);
   currentMode = 0;
 });
+
+const getGridSize = () => {
+  while (true) {
+    let input = prompt('How many squares?');
+    if (input === null) {
+      alert("I'm out of here");
+      return true;
+    } else {
+      if (isNaN(input)) {
+        alert('Invalid input, please enter a number');
+      } else if (input.length <= 0) {
+        return 16;
+      } else {
+        return parseInt(input);
+      }
+    }
+  }
+};
 
 toggleColorButton.addEventListener('click', (e) => {
   currentMode = (currentMode + 1) % modes.length;
