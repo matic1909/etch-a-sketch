@@ -132,9 +132,8 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  background-color: rgb(255, 227, 227);
+  background-color: rgb(255, 236, 246);
 }
 
 input[type='color'] {
@@ -148,33 +147,31 @@ input[type='color']::-webkit-color-swatch {
   border: none;
 }
 
-h1 {
-  font-size: 64px;
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30vh;
 }
 
 .etch {
+  width: 95vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(200, 0, 0);
   border: 2.5vw solid rgb(200, 0, 0);
-  border-bottom: 10px solid rgb(200, 0, 0);
-  border-top: 1px solid rgb(200, 0, 0);
+  padding-bottom: 8px;
+  /* border-bottom: 10px solid rgb(200, 0, 0);
+  border-top: 1px solid rgb(200, 0, 0); */
   border-radius: 15px;
   box-shadow: 10px 10px 2px 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 64px;
 }
 
 .container {
   display: grid;
-  height: 70vw;
-  max-height: 600px;
-  width: 70vw;
-  max-width: 600px;
-}
-
-#title {
-  margin-top: 32px;
+  height: 95vw;
+  width: 95vw;
 }
 
 .controls {
@@ -182,26 +179,22 @@ h1 {
   justify-content: space-between;
   align-items: flex-end;
   padding-top: 15px;
-  width: 70vw;
-  max-width: 600px;
-  height: 25vw;
+  width: 95vw;
+  height: 10vh;
   max-height: 150px;
   background-color: rgb(200, 0, 0);
 }
 
 .control-knobs {
   position: absolute;
-  width: 600px;
+  width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
 }
 
 .knob {
-  height: 20vw;
+  height: 15vw;
   max-height: 140px;
-  width: 20vw;
+  width: 15vw;
   max-width: 140px;
   border-radius: 100px;
   background-color: rgb(253, 255, 244);
@@ -215,19 +208,19 @@ h1 {
 
 button {
   min-width: 100px;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border: 3px solid black;
   border-radius: 5px;
   background-color: lightgrey;
 }
 
 .buttons {
-  height: 30vh;
+  width: 100vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 24px;
+  justify-content: space-evenly;
 }
 
 .menu-buttons {
@@ -237,11 +230,19 @@ button {
   gap: 12px;
 }
 
+.menu-buttons > button {
+  width: 45vw;
+}
+
 .option-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
+}
+
+.option-buttons > button {
+  width: 30vw;
 }
 
 .mode-button {
@@ -253,15 +254,21 @@ button {
   color: white;
 }
 
+#title {
+  display: none;
+  font-size: 64px;
+  margin-top: 32px;
+}
+
 #branding {
   text-align: center;
   align-self: center;
-  font-size: 52px;
+  font-size: 36px;
   color: rgb(255, 242, 123);
 }
 
 #branding > p {
-  margin: 16px;
+  margin: 10px;
 }
 
 .colorpicker-container {
@@ -273,23 +280,87 @@ button {
 #colorpicker {
   border: 3px solid black;
   border-radius: 5px;
-  width: 150px;
-  height: 50px;
+  width: 50vw;
+  height: 35px;
 }
 
-@media (max-width: 500px) {
+#instruction {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .etch {
+    width: 600px;
+    border: 35px solid rgb(200, 0, 0);
+  }
+
+  .container {
+    width: 600px;
+    height: 600px;
+  }
+
+  .controls {
+    width: 600px;
+  }
+  .info {
+    justify-content: space-evenly;
+  }
+
+  .buttons {
+    gap: 24px;
+  }
+
+  .menu-buttons > button {
+    width: 25vw;
+    max-width: 300px;
+  }
+
+  .modes-header {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .option-buttons {
+    width: 600px;
+  }
+
+  .option-buttons > button {
+    width: 30%;
+    margin-bottom: 16px;
+  }
+
+  .colorpicker-container > label {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  #title {
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  #instruction {
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  #colorpicker {
+    width: 200px;
+    height: 50px;
+  }
+}
+
+/* @media (max-width: 500px) {
   body {
     justify-content: space-around;
   }
 
-  .buttons {
-    width: 100%;
-    justify-content: space-around;
+  button {
+    padding: 5px 10px;
   }
 
   .menu-buttons {
     width: 100%;
-    margin-top: 16px;
   }
 
   .menu-buttons > button {
@@ -298,11 +369,7 @@ button {
 
   .modes {
     width: 100%;
-    font-size: 24px;
-  }
-
-  .modes-header {
-    margin-bottom: 16px;
+    font-size: 20px;
   }
 
   .option-buttons {
@@ -315,12 +382,12 @@ button {
 
   #colorpicker {
     width: 90%;
+    height: 30px;
   }
 
   .etch {
     width: 95vw;
     border: none;
-    margin-bottom: 8px;
   }
 
   .container {
@@ -333,19 +400,27 @@ button {
   }
 
   .colorpicker-container > label {
-    font-size: 24px;
-    margin-bottom: 16px;
+    font-size: 20px;
+    margin-bottom: 4px;
   }
 
   #title {
     display: none;
   }
 
-  #instruction {
-    display: none;
-  }
+  
 
   #branding {
     font-size: 32px;
   }
 }
+
+@media (max-height: 800px) {
+  .colorpicker-container > label {
+    display: none;
+  }
+
+  .modes-header {
+    display: none;
+  }
+} */
