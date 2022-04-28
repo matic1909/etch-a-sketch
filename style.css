@@ -222,6 +222,7 @@ button {
 }
 
 .buttons {
+  height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -263,20 +264,88 @@ button {
   margin: 16px;
 }
 
+.colorpicker-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 #colorpicker {
   border: 3px solid black;
   border-radius: 5px;
+  width: 150px;
   height: 50px;
-  width: 50px;
-  transform: translateY(-8px);
 }
 
 @media (max-width: 500px) {
+  body {
+    justify-content: space-around;
+  }
+
+  .buttons {
+    width: 100%;
+    justify-content: space-around;
+  }
+
   .menu-buttons {
-    flex-direction: column;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .menu-buttons > button {
+    width: 45%;
+  }
+
+  .modes {
+    width: 100%;
+    font-size: 24px;
+  }
+
+  .modes-header {
+    margin-bottom: 16px;
   }
 
   .option-buttons {
-    flex-direction: column;
+    width: 100%;
+  }
+
+  .option-buttons > button {
+    width: 30%;
+  }
+
+  #colorpicker {
+    width: 90%;
+  }
+
+  .etch {
+    width: 95vw;
+    border: none;
+    margin-bottom: 8px;
+  }
+
+  .container {
+    width: 90vw;
+    height: 90vw;
+  }
+
+  .colorpicker-container {
+    width: 90%;
+  }
+
+  .colorpicker-container > label {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  #title {
+    display: none;
+  }
+
+  #instruction {
+    display: none;
+  }
+
+  #branding {
+    font-size: 32px;
   }
 }
