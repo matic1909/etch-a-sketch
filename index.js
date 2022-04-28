@@ -6,24 +6,47 @@ const colorDisplay = document.querySelector('.color');
 
 const rainbowColors = [
   [255, 0, 0],
+  [255, 64, 0],
   [255, 127, 0],
+  [255, 192, 0],
   [255, 255, 0],
+  [192, 255, 0],
   [127, 255, 0],
+  [64, 255, 0],
   [0, 255, 0],
+  [0, 255, 64],
   [0, 255, 127],
+  [0, 255, 192],
   [0, 255, 255],
+  [0, 192, 255],
   [0, 127, 255],
+  [0, 64, 255],
   [0, 0, 255],
+  [64, 0, 255],
   [127, 0, 255],
+  [192, 0, 255],
   [255, 0, 255],
+  [255, 0, 192],
   [255, 0, 127],
+  [255, 0, 64],
 ];
-const modes = ['black', 'random', 'rainbow'];
+const modes = ['black', 'random', 'rainbow', 'rainbow-fine'];
 let currentMode = 0;
 let colorValues = [0, 0, 0];
 let rainbow = false;
 let rainbowIndex = 0;
 let randomColor = false;
+let drawing = false;
+
+window.addEventListener('mousedown', (e) => {
+  e.preventDefault();
+  drawing = true;
+});
+
+window.addEventListener('mouseup', (e) => {
+  e.preventDefault();
+  drawing = false;
+});
 
 gridButton.addEventListener('click', (e) => {
   const gridSize = parseInt(prompt('How many squares?'));
@@ -43,17 +66,20 @@ clearButton.addEventListener('click', (e) => {
 });
 
 const handleMouseEnter = (e) => {
-  const mode = modes[currentMode];
-  if (mode === 'black') {
-    colorValues = [0, 0, 0];
+  setColor();
+  if (drawing) {
+    e.target.style.backgroundColor = getColorString(colorValues);
   }
-  if (mode === 'random') {
-    getRandomRGB();
-  }
-  if (mode === 'rainbow') {
-    getNextColorInRainbow();
-  }
+};
+
+const handleClick = (e) => {
+  setColor();
   e.target.style.backgroundColor = getColorString(colorValues);
+};
+
+const handleRightClick = (e) => {
+  e.preventDefault();
+  e.target.style.backgroundColor = '';
 };
 
 const generateGrid = (size) => {
@@ -63,7 +89,23 @@ const generateGrid = (size) => {
     const div = document.createElement('div');
     div.classList.add('cell');
     div.addEventListener('mouseenter', handleMouseEnter);
+    div.addEventListener('mousedown', handleClick);
+    div.addEventListener('contextmenu', handleRightClick);
     container.appendChild(div);
+  }
+};
+
+const setColor = () => {
+  const mode = modes[currentMode];
+  if (mode === 'black') {
+    colorValues = [0, 0, 0];
+    return;
+  }
+  if (mode === 'random') {
+    getRandomRGB();
+  }
+  if (mode === 'rainbow' || mode === 'rainbow-fine') {
+    getNextColorInRainbow();
   }
 };
 
@@ -80,8 +122,10 @@ const getRandomRGB = () => {
 };
 
 const getNextColorInRainbow = () => {
+  let step = 1;
+  if (modes[currentMode] === 'rainbow') step = 2;
   colorValues = rainbowColors[rainbowIndex];
-  rainbowIndex = (rainbowIndex + 1) % rainbowColors.length;
+  rainbowIndex = (rainbowIndex + step) % rainbowColors.length;
 };
 
 generateGrid(16);
